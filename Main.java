@@ -1,75 +1,45 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main{
-    static Scanner input = new Scanner(System.in);
-    static void command() {
-        System.out.println("An 1 de nhap thong tin sach");
-        System.out.println("An 2 de in thong tin sach");
-        System.out.println("An 3 de nhap thong tin tac gia");
-        System.out.println("An 4 de in thong tin tac gia");
-        System.out.println("An 5 de ket thuc");
-    }
-    public static void main(String[] args){
-        ArrayList<Sach> l_book = new ArrayList<>();
-        ArrayList<Tacgia> l_author = new ArrayList<>();
-        System.out.println("Nhap 1 de bat dau");
-        int cmd = Integer.parseInt(input.nextLine());
-        while (cmd != 5) {
-            command();
-            cmd = Integer.parseInt(input.nextLine());
-            if (cmd == 1) {
-                System.out.println("So sach can nhap: ");
-                int sach = Integer.parseInt(input.nextLine());
-                    int check = 0;
-                    for (int i = 0; i < sach; i++){
-                        Sach book = new Sach();
-                        book.input();
+public class Main {
 
-                    for (int j = 0; j < l_author.size(); j++) {
-                        if (l_author.get(j).getName().equals(book.getName())) {
-                            check = 1;
-                            break;
-                        }
-                    }
+    public static Scanner scanner = new Scanner(System.in);
 
-                    if (check == 0) {
-                        Tacgia author = new Tacgia ();
-                        l_author.add(author);
-                    }
-                    l_book.add(book);
-                }
-            }
-            else if (cmd == 2) {
-                for (Sach ttsach : l_book) {
-                    ttsach.display();
-                }
-            }
-            else if (cmd == 3) {
-                System.out.println("So tac gia can nhap:  ");
-                int tac_Gia = Integer.parseInt(input.nextLine());
-                for (int i = 0; i < tac_Gia; i++) {
-                    Tacgia author = new Tacgia();
-                    author.input(l_author);
-                }
-            }
-            else if (cmd == 4) {
-                System.out.println("Ten tac gia muon tim: ");
-                String ten_tg = input.nextLine();
+    public static void main (String args[]) {
 
-                    for (int i = 0; i < l_book.size(); i++) {
-                        if (l_book.get(i).getName().equals(ten_tg)) {
-                            l_book.get(i).display();
-                         }
-                        else {
-                            System.out.println("Khong ton tai");
-                    }
-                }
-            }
-            else if (cmd == 5) {
-                System.out.println("Ket thuc");
-            }
-        }
-        System.out.println(l_book.size());
+        ArrayList<ID> lst_id = new ArrayList<>();
+        lst_id.add(new ID("1"));
+        lst_id.add(new ID("2"));
+        lst_id.add(new ID("3"));
+
+        ArrayList<Brand> lst_brand = new ArrayList<>();
+        lst_brand.add(new Brand("ASUS"));
+        lst_brand.add(new Brand("MSI"));
+        lst_brand.add(new Brand("Intel"));
+
+        ArrayList<CPU> lst_cpu = new ArrayList<>();
+        lst_cpu.add(new CPU(lst_id.get(0), "Intel Core i9 10900k", lst_brand.get(0), 300000f));
+        lst_cpu.add(new CPU(lst_id.get(1), "AMD Ryzen 9 5900X", lst_brand.get(1), 3000000f));
+        lst_cpu.add(new CPU(lst_id.get(2), "AMD Ryzen 5 5600X", lst_brand.get(2), 3000000f));
+
+        ArrayList<Mainboard> lst_mainboard = new ArrayList<>();
+        lst_mainboard.add(new Mainboard(lst_id.get(0), "XT123", lst_brand.get(0), 300000f));
+        lst_mainboard.add(new Mainboard(lst_id.get(1), "D1103", lst_brand.get(1), 3000000f));
+        lst_mainboard.add(new Mainboard(lst_id.get(2), "CAD110", lst_brand.get(2), 3000000f));
+
+        ArrayList<RAM> lst_ram = new ArrayList<>();
+        lst_ram.add(new RAM(lst_id.get(0), "Intel Core i9 10900k", lst_brand.get(0), 300000f));
+        lst_ram.add(new RAM(lst_id.get(1), "AMD Ryzen 9 5900X", lst_brand.get(1), 3000000f));
+        lst_ram.add(new RAM(lst_id.get(2), "AMD Ryzen 5 5600X", lst_brand.get(2), 3000000f));
+
+        ArrayList<Computer> lst_pc = new ArrayList<>();
+        lst_pc.add(new Computer(lst_cpu.get(0), lst_mainboard.get(0), lst_ram.get(0), 5));
+        lst_pc.add(new Computer(lst_cpu.get(1), lst_mainboard.get(1), lst_ram.get(1), 8));
+        lst_pc.add(new Computer(lst_cpu.get(2), lst_mainboard.get(2), lst_ram.get(2), 10));
+
+        lst_pc.forEach(computer -> {
+            System.out.printf("%s %s %s %d %f\n", computer.getCpu().getName(), computer.getRam().getName(),
+                    computer.getMainboard().getName(), computer.getSl(), computer.getPrice());
+        });
     }
 }
